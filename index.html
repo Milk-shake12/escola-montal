@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Escola Estadual de Montalvânia</title>
+  <meta name="description" content="Aplicativo de Atalhos para a Escola Estadual de Montalvânia" />
+  <link rel="icon" href="../Imagens/favicon_0.ico">
+  
+  
+   <style>
+       
+       :root {
+  --bg: #0b1225;               /* azul bem escuro (fundo principal) */
+  --fg: #f5f7fa;               /* texto branco suave */
+  --muted: #9aa4b8;            /* texto secundário acinzentado */
+  --brand: #2e8b57;            /* verde-folha principal (tipo verde floresta) */
+  --brand-2: #3fa76d;          /* verde secundário mais claro */
+  --tile-bg: #121c35;          /* fundo dos cards */
+  --tile-border: #1f2a4d;      /* borda azul intermediária */
+  --radius: 18px;
+  --shadow: 0 8px 22px -12px rgba(0, 0, 0, 0.6);
+  --focus: 0 0 0 3px rgba(46, 139, 87, 0.35);
+}
+
+* {
+  box-sizing: border-box;
+  user-select: none;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  color: var(--fg);
+  background-color: var(--bg);
+}
+
+.container {
+  max-width: 1040px;
+  margin-inline: auto;
+  padding: 24px;
+}
+
+header {
+  display: grid;
+  gap: 12px;
+  align-items: center;
+  justify-items: center;
+  margin: 8px 0 24px;
+}
+
+#imageschool {
+  height: 80px;
+}
+
+.brand-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: var(--brand);
+  color: #e9f4ec;
+  font-weight: 600;
+  border: none;
+}
+
+.app-title {
+  font-size: clamp(24px, 4vw, 40px);
+  line-height: 1.1;
+  margin: 0;
+  text-align: center;
+  color: var(--fg);
+}
+
+.app-sub {
+  margin: 0;
+  color: var(--muted);
+  font-size: clamp(14px, 2.1vw, 18px);
+  text-align: center;
+}
+
+.grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (min-width: 720px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.tile {
+  background: var(--tile-bg);
+  border: 1px solid var(--tile-border);
+  border-radius: var(--radius);
+  padding: 18px 18px 16px;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: var(--shadow);
+  display: grid;
+  gap: 14px;
+  align-content: start;
+  min-height: 150px;
+  transition: transform 0.15s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.tile:hover {
+  transform: translateY(-3px);
+  border-color: var(--brand);
+  background-color: #16244a;
+}
+
+.tile:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow), var(--focus);
+}
+
+.tile .icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: var(--brand);
+  color: #e9f4ec;
+  font-weight: bold;
+}
+
+.icon img {
+  width: 40px;
+  height: 40px;
+}
+
+.tile h3 {
+  margin: 0;
+  font-size: 18px;
+  color: var(--fg);
+}
+
+.tile p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.tile-professor {
+  grid-column: span 2;
+}
+
+@media (min-width: 720px) {
+  .tile-professor {
+    grid-column: span 3;
+  }
+}
+
+.tile-professor {
+  background: var(--tile-bg);
+  border: 1px solid var(--tile-border);
+  border-radius: var(--radius);
+  padding: 18px 18px 16px;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: var(--shadow);
+  display: grid;
+  gap: 14px;
+  align-content: start;
+  min-height: 150px;
+  transition: transform 0.15s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.tile-professor:hover {
+  transform: translateY(-5px);
+  background: var(--tile-bg);
+}
+
+.tile-professor .icon {
+  background: var(--brand);
+}
+
+.tile-professor img {
+  width: 40px;
+  height: 40px;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--tile-border);
+  background: var(--brand);
+  text-decoration: none;
+  color: #e9f4ec;
+  font-weight: 700;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.cta:hover {
+  transform: translateY(-3px);
+  background: var(--brand-2);
+  color: #ffffff;
+}
+
+.cta svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ===== RODAPÉ ===== */
+footer {
+  margin-top: 20px; /* reduz o espaço entre o conteúdo e o rodapé */
+  padding: 12px 0;
+  border-top: 1px solid var(--tile-border);
+  display: flex;
+  justify-content: center; /* centraliza o conteúdo do rodapé */
+  animation: fadeIn 1s ease-out forwards;
+  animation-delay: 1.3s;
+  opacity: 0;
+}
+
+.rodape {
+  width: 100%;
+  max-width: 1040px; /* mesma largura do container principal */
+  display: flex;
+  justify-content: space-between; /* joga os textos para os cantos */
+  align-items: center;
+  padding: 0 12px; /* aproxima os links ainda mais das bordas */
+}
+
+.rodape a {
+  color: var(--brand-2);
+  font-weight: 500;
+  transition: color 0.2s ease, transform 0.2s ease;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.rodape a:first-child {
+  animation-delay: 1.4s; /* Suporte */
+}
+
+.rodape a:last-child {
+  animation-delay: 1.55s; /* Créditos */
+}
+
+.rodape a:hover {
+  color: var(--brand);
+  transform: translateY(-2px);
+}
+
+
+
+/* ===== ANIMAÇÕES DE ENTRADA ===== */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Cabeçalho */
+header {
+  animation: fadeIn 1s ease-out forwards;
+}
+
+/* Títulos e subtítulos */
+.app-title,
+.app-sub {
+  opacity: 0;
+  animation: fadeInUp 1s ease-out forwards;
+}
+.app-title {
+  animation-delay: 0.2s;
+}
+.app-sub {
+  animation-delay: 0.4s;
+}
+
+/* Cards (atalhos principais) */
+.tile {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+.tile:nth-child(1) { animation-delay: 0.4s; }
+.tile:nth-child(2) { animation-delay: 0.55s; }
+.tile:nth-child(3) { animation-delay: 0.7s; }
+.tile:nth-child(4) { animation-delay: 0.85s; }
+.tile:nth-child(5) { animation-delay: 1.0s; }
+.tile:nth-child(6) { animation-delay: 1.15s; }
+
+       
+   </style>
+  
+  
+  
+</head>
+<body>
+  <div class="container" role="application">
+    <header>
+      <img src="../Imagens/favicon.png"  id="imageschool" alt="">
+      <h1 class="app-title">Bem-vindo(a) ao Centro Escolar</h1>
+      <p class="app-sub">Centro de Informações da Escola Estadual de Montalvânia</p>
+    </header>
+
+    <main class="grid" aria-label="Atalhos principais">
+      <a class="tile" href="#agenda" aria-label="Abrir Agenda">
+        <span class="icon" aria-hidden="true">
+          <img class="iconstyle" src="../Imagens/calendario.png" alt="">
+        </span>
+        <div>
+          <h3>Horários</h3>
+          <p>Calendário letivo, provas e eventos.</p>
+        </div>
+      </a>
+
+      <a class="tile" href="#boletim" aria-label="Abrir Boletim">
+        <span class="icon" aria-hidden="true">
+          <img src="../Imagens/boletim.png" alt="" class="iconstyle">
+        </span>
+        <div>
+          <h3>Boletim</h3>
+          <p>Notas, frequências e desempenho.</p>
+        </div>
+      </a>
+
+      <a class="tile" href="#avisos" aria-label="Abrir Avisos">
+        <span class="icon" aria-hidden="true">
+          <img src="../Imagens/avisos.png" alt="" class="iconstyle">
+        </span>
+        <div>
+          <h3>Avisos</h3>
+          <p>Comunicados oficiais da escola.</p>
+        </div>
+      </a>
+
+      <a class="tile" href="#biblioteca" aria-label="Abrir Biblioteca">
+        <span class="icon" aria-hidden="true">
+          <img src="../Imagens/biblioteca.png" alt="" class="iconstyle">
+        </span>
+        <div>
+          <h3>Biblioteca</h3>
+          <p>Empréstimo de Livros e suporte.</p>
+        </div>
+      </a>
+
+
+      <a class="tile" href="#cardápio">
+        <span class="icon" aria-hidden="true">
+          <img  class="iconstyle" src="../Imagens/cardapio.png" alt="">
+        </span>
+        <div>
+          <h3>Cardápio</h3>
+          <p>Cardápio da semana e intervalos.</p>
+        </div>
+      </a>
+
+      <a class="tile" href="#contato">
+        <span class="icon" aria-hidden="true">
+          <img src="../Imagens/contato.png" alt="" class="iconstyle">
+        </span>
+        <div>
+          <h3>Contato</h3>
+          <p>Secretaria e atendimento.</p>
+        </div>
+      </a>
+
+      <a class="tile tile-professor" href="#professor" aria-label="Abrir Área do Professor">
+        <span class="icon" aria-hidden="true">
+          <img src="../Imagens/professor.png" alt="" class="iconstyle">
+        </span>
+        <div>
+          <h3>Área do Professor</h3>
+          <p>Acesso ao sistema de notas, relatórios e comunicados internos.</p>
+        </div>
+      </a>
+    </main>
+
+    <footer>
+      <div class="rodape">
+        <a href="" class="maisinfos">Suporte</a>
+        <a href="" class="maisinfos">Créditos</a>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
